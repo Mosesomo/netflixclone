@@ -6,3 +6,5 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+In this project, i used react js, axios and tailwind css to build a netflix clone. I used thmovies database api for accessing the trending, toprated and upcoming movies and here is the link if you want to check this awesome clone https://dulcet-cranachan-2aeddc.netlify.app/
