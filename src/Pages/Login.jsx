@@ -23,7 +23,8 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post(`${requests.requestAuthentication}/auth/login`, signin);
-            login(response.data);
+            const { data } = response;
+            login(data.user, data.token);
             setAlert({ message: response.data.message, type: "success" });
             setTimeout(() => {
                 navigate('/');

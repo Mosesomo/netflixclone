@@ -16,6 +16,7 @@ const Signup = () => {
   const [error, setError] = useState(null);
   const [alert, setAlert] = useState({ message: "", type: "" });
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setRegister({ ...register, [e.target.name]: e.target.value });
@@ -25,7 +26,8 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${requests.requestAuthentication}/auth/register`, register);
-      console.log(response.data)
+      const { data } = response;
+      login(data.user, data.token);
       setAlert({ message: response.data.message, type: "success" });
       setTimeout(() => {
         navigate('/login');
@@ -43,12 +45,12 @@ const Signup = () => {
             <div className="fixed w-full h-full top-0 left-0 bg-black/70"></div>
             <div className="w-[100%] absolute flex justify-center py-24 mt-10">
                 <div className="w-[300px] lg:w-[450px] md:w-[400px] h-[610px] mb-5 bg-black/75 py-10 lg:px-7 md:px-8">
-                    <h1 className="text-bold text-3xl text-center">Sign Up</h1>
                     {alert.message && (
-                        <div className={`p-3 my-3 text-center rounded ${alert.type === 'success' ? 'bg-green-600' : 'bg-red-600'}`}>
-                          {alert.message}
+                        <div className={` p-1 mt-3 mb-3 text-center rounded ${alert.type === 'success' ? 'border-[1px] border-green-700 font-bold text-sm' : 'border-[1px] border-red-700 text-red-600 text-sm'}`}>
+                            {alert.message}
                         </div>
                     )}
+                    <h1 className="text-bold text-3xl text-center">Sign Up</h1>
                     <form className="flex flex-col p-5" onSubmit={handleSubmit}>
                         <input
                           className="p-1 mb-5 text-[14px] bg-gray-700 outline-none rounded"
