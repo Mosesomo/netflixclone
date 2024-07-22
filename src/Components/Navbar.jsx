@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from './AuthContext';
 
 const Navbar = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
 
   return (
     <div className="w-full absolute flex justify-between items-center py-4 px-3 cursor-pointer z-[100]">
@@ -11,7 +11,7 @@ const Navbar = () => {
       </Link>
       {isAuthenticated() ? (
         <div className="flex items-center">
-          <Link to="/account" className="font-bold rounded border-b-[3px] border-red-700 py-1 lg:px-4 md:px-3 px-2">Account</Link>
+          <Link to="/account" className="font-bold rounded border-b-[3px] border-red-700 py-1 lg:px-4 md:px-3 px-2">{user.firstName}</Link>
           <button onClick={logout} className="bg-red-600 p-1 lg:px-3 md:px-3 px-2 py-1 lg:ml-4 md:ml-4 ml-2 rounded cursor-pointer hover:scale-105 duration-300">Logout</button>
         </div>
       ) : (

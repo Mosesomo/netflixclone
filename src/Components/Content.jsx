@@ -35,7 +35,7 @@ const Content = () => {
             <h1 className='text-xl font-serif font-bold'>{movies.title}</h1>
             <div className='py-2'>
                 <button className='mr-4 bg-white py-2 px-4 text-black font-bold rounded'>Play</button>
-                <button className='font-bold border-[2px] py-2 px-3'>Watch Later</button>
+                <button className='font-bold border-[1px] py-2 px-3 rounded border-red-500'>Watch Later</button>
             </div>
             <p className='mb-2 text-gray-500'>Released: {movies?.release_date}</p>
             <p className='text-gray-300'>{truncateString(movies?.overview, 200)}</p>

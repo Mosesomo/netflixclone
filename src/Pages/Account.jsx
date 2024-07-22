@@ -1,49 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import profile from '../assets/default.jpg';
 import { useAuth } from '../Components/AuthContext';
 import requests from '../Request';
 import axios from 'axios';
 
 const Account = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log('User:', user);
-
-    if (user && user.userId && user.token) {
+    if (isAuthenticated()) {
       console.log('Fetching user data for:', user.userId);
-
       axios.get(`${requests.requestAuthentication}/api/users/${user.userId}`, {
         headers: {
-          'Authorization': `Bearer ${user.token}`
+          'Authorization': `Bearer ${user.accessToken}`
         }
       })
       .then(response => {
         console.log('API response:', response.data);
         setUserData(response.data.data);
-        setLoading(false);
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
-        setError('Failed to fetch user data.');
-        setLoading(false);
       });
-    } else {
-      setError('User data or token is missing.');
-      setLoading(false);
     }
-  }, [user]);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p className="absolute text-red-600 mt-28 text-center p-38">{error}</p>;
-  }
+  }, [isAuthenticated, user]);
 
   return (
     <div className="w-full h-screen">
@@ -54,14 +35,12 @@ const Account = () => {
           <h1 className="text-bold text-3xl text-center">Update Account</h1>
           <div className="lg:flex gap-5 justify-between items-center">
             <img className="mb-4 mt-6 object-cover h-[196px] rounded" src={profile} alt="default" />
-            {userData ? (
+            {userData && (
               <div>
                 <p className="font-bold">Email: <small>{userData.email}</small></p>
                 <p className="font-bold">Name: <small>{userData.firstName} {userData.lastName}</small></p>
                 <p className="font-bold">Phone: <small>{userData.phone}</small></p>
               </div>
-            ) : (
-              <p>No user data available</p>
             )}
           </div>
           <form className="flex flex-col p-3">

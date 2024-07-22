@@ -1,20 +1,23 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = (userData, token) => {
-    setUser({ ...userData, token });
+  const login = (userData, accessToken) => {
+    console.log('Logging in user:', userData);
+    setUser({ ...userData, accessToken });
   };
 
   const logout = () => {
+    console.log('Logging out user');
     setUser(null);
   };
 
   const isAuthenticated = () => {
-    return !!user;
+    console.log('Checking authentication status:', user);
+    return user && user.accessToken;
   };
 
   return (
