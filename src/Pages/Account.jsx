@@ -31,10 +31,10 @@ const Account = () => {
       <img className="w-full h-full object-cover absolute" src="https://www.whats-on-netflix.com/wp-content/uploads/2022/08/netflix-logos-cancelations-renewals.webp" alt="" />
       <div className="fixed w-full h-screen top-0 left-0 bg-black/70"></div>
       <div className="w-[100%] absolute flex justify-center py-24 mt-12">
-        <div className="w-[300px] lg:w-[500px] md:w-[400px] h-[524px] bg-black/75 p-4 py-10 md:px-9">
-          <h1 className="text-bold text-3xl text-center">Update Account</h1>
+        <div className="w-[300px] lg:w-[700px] md:w-[700px] h-[524px] bg-black/75 p-4 py-10 md:px-9">
+          <h1 className="text-bold text-3xl text-center">Welcome {user.firstName} {user.lastName}</h1>
           <div className="lg:flex gap-5 justify-between items-center">
-            <img className="mb-4 mt-6 object-cover h-[196px] rounded" src={profile} alt="default" />
+            <img className="mb-4 mt-6 object-cover h-[160px] w-[160px] rounded border-[2px] border-red-500" src={profile} alt="default" />
             {userData && (
               <div>
                 <p className="font-bold">Email: <small>{userData.email}</small></p>
